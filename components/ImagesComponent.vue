@@ -13,11 +13,11 @@
   </v-layout>
 </template>
 <script lang="ts">
-  import Vue from 'vue'
+  import { defineComponent } from 'vue'
   import axios from 'axios'
   import ImageComponent from '~/components/ImageComponent.vue'
 
-  export default Vue.extend({
+  export default defineComponent({
     name: 'ImagesComponent',
     components: { ImageComponent },
     props: {
@@ -40,10 +40,10 @@
       }
     },
     computed: {
-      imagesUrl() {
+      imagesUrl(): string {
         return 'https://jsonplaceholder.typicode.com/photos'
       },
-      indexIntersect() {
+      indexIntersect(): number {
         if (this.imagesView.length > this.loadMoreRemaining) {
           return this.imagesView.length - this.loadMoreRemaining
         }
@@ -61,7 +61,9 @@
       this.loading = false
     },
     methods: {
-      loadNext(_entries, _observer, isIntersecting) {
+      loadNext(_entries: IntersectionObserverEntry[],
+               _observer: IntersectionObserver,
+               isIntersecting: boolean) {
         if (isIntersecting) {
           setTimeout(() => {
             this.loading = true
@@ -73,7 +75,7 @@
           })
         }
       },
-      removeImage(index) {
+      removeImage(index: number) {
         this.imagesView.splice(index, 1)
       },
     },

@@ -5,9 +5,9 @@
 </template>
 
 <script lang="ts">
-  import Vue from 'vue'
+  import { defineComponent } from 'vue'
   import ImagesComponent from '~/components/ImagesComponent.vue'
-  export default Vue.extend({
+  export default defineComponent({
     name: 'IndexPage',
     components: { ImagesComponent },
   })

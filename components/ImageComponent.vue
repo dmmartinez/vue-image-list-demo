@@ -2,7 +2,8 @@
   <img :src="url" :alt="title" class="im pa-1" />
 </template>
 <script>
-  export default {
+  import { defineComponent } from 'vue'
+  export default defineComponent({
     name: 'ImageComponent',
     props: {
       url: {
@@ -14,7 +15,7 @@
         required: true,
       },
     },
-  }
+  })
 </script>
 <style>
   img.im {
