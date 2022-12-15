@@ -2,11 +2,9 @@
   <v-layout row wrap>
     <v-progress-circular v-if="loading" indeterminate color="primary" />
     <div v-if="!loading" class="box-length pa-2">Images length: {{ imagesView.length }}</div>
-    <!-- <div v-if="!loading && !!imagesView && !!imagesView.length" class="imgs-container"> -->
     <div v-if="!loading" class="imgs-container">
       <div v-for="(image, index) in imagesView" :key="image.id" class="img-container pl-2 pr-2" @click="removeImage(index)">
         <image-component :url="image.url" :title="image.title" />
-        <!-- <div v-if="index === (imagesView.length - 1)" v-intersect="loadNext" class="pa-1"></div> -->
       </div>
     </div>
     <div v-intersect="loadNext" class="pa-1"></div>
@@ -52,24 +50,25 @@
       const res = await axios.get(this.imagesUrl)
       this.images = res.data
       this.imagesView = this.images.slice(0, this.itemsLoad)
-      // this.images = this.images.slice(this.itemsLoad)
       this.images.splice(0, this.itemsLoad)
     },
     mounted() {
       this.loading = false
     },
     methods: {
-      loadNext() {
-        setTimeout(() => {
-          this.loading = true
-          this.imagesView.push(...this.images.slice(0, this.itemsLoad))
-          // this.images = this.images.slice(this.itemsLoad)
-          this.images.splice(0, this.itemsLoad)
-          this.loading = false
-        })
+      loadNext(_entries, _observer, isIntersecting) {
+        if (isIntersecting) {
+          setTimeout(() => {
+            this.loading = true
+            if (!!this.images && !!this.images.length) {
+              this.imagesView.push(...this.images.slice(0, this.itemsLoad))
+              this.images.splice(0, this.itemsLoad)
+            }
+            this.loading = false
+          })
+        }
       },
       removeImage(index) {
-        // this.imagesView = this.imagesView.splice(index, 1)
         this.imagesView.splice(index, 1)
       },
     },
