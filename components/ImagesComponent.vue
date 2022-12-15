@@ -5,6 +5,7 @@
     <div v-if="!loading" class="imgs-container">
       <div v-for="(image, index) in imagesView" :key="image.id" class="img-container pl-2 pr-2" @click="removeImage(index)">
         <image-component :url="image.url" :title="image.title" />
+        <div v-if="!!indexIntersect && (index == indexIntersect)" v-intersect="loadNext" class="pa-1"></div>
       </div>
     </div>
     <div v-intersect="loadNext" class="pa-1"></div>

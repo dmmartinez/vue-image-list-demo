@@ -1,6 +1,6 @@
 <template>
   <v-flex grow shrink>
-    <images-component :items-load="10" />
+    <images-component :items-load="20" />
   </v-flex>
 </template>
 
