@@ -24,8 +24,13 @@
       itemsLoad: {
         type: Number,
         default: 20,
-        required: false
-      }
+        required: false,
+      },
+      loadMoreRemaining: {
+        type: Number,
+        default: 5,
+        required: false,
+      },
     },
     data() {
       return {
@@ -39,11 +44,10 @@
         return 'https://jsonplaceholder.typicode.com/photos'
       },
       indexIntersect() {
-        if (this.loading) {
-          return 0
-        } else {
-          return Math.floor(this.imagesView.length - (this.imagesView.length / 3))
+        if (this.imagesView.length > this.loadMoreRemaining) {
+          return this.imagesView.length - this.loadMoreRemaining
         }
+        return 0
       },
     },
     async created() {
