@@ -95,20 +95,15 @@
   }
   @media screen and (max-width: 600px) {
     .img-container {
-      width: 100%;
+      width: 50%;
     }
   }
   @media screen and (min-width: 601px) and (max-width: 960px) {
     .img-container {
-      width: 50%;
-    }
-  }
-  @media screen and (min-width: 961px) and (max-width: 1264px) {
-    .img-container {
       width: 33%;
     }
   }
-  @media screen and (min-width: 1265px) {
+  @media screen and (min-width: 961px) {
     .img-container {
       width: 25%;
     }
